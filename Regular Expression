@@ -1,0 +1,33 @@
+grammer:
+
+take abc for example:
+.         -> match any character expect "\n"                   -> a.c can match abc
+\         -> change the original meaning of the next character -> a\.c can match a.c
+[...]     -> match any character in the list                   -> a[bcd]e can match abe ace ade
+\d        -> number[0-9]                                       -> a\bc can match a1c
+\D        -> Non-number[^\d]                                   -> a\Dc can match abc
+\s        -> space                                             -> a\sc can match a c
+\S        -> Non-space[^\s]                                    -> a\Sc can match abc
+\w        -> words[A-Za-z0-9_]                                 -> a\wc can match abc
+\W        -> Non-words[^\w]                                    -> a\Wc can match a c
+*         -> match the previous character 0 or infinity times  -> abc* can match ab abccccc
++         -> match the previous character 1 or infinity times  -> abc+ can match abc abccccc
+?         -> match the previous character 0 or 1 times         -> abc? can match ab abc
+{m}       -> match the previous character m times              -> ab{2}c can match abbc
+{m,n}     -> match the previous character m to n times         -> ab{1,2}c can match abc abbc
+{,n}      -> match the previous character 0-n times
+{m,}      -> match the previous character m to infinity times
+
+^         -> match the beginning of strings of every row        -> ^abc can match abc
+$         -> match the end of strings of every row              -> abc$ can match abc
+\A        -> only match the beginning of the string             -> \Aabc can match abc
+\Z        -> only match the end of the string                   -> abc\Z can match abc
+\b        -> match between \w and \W                            -> a\b!bc can match a!bc
+\B        -> [^\b]                                              -> a\Bbc can match abc
+
+|         -> match any expression from left to right            -> abc|def can match abc def
+(...)     -> grouping                                           -> (abc){2} can match abcabc
+\<number> -> quoting the number of <number>                     -> (\d)abc\1 can match 1abc1 5abc5
+
+(?#...)   ->annotation                                          -> abc(?#comment)123 can match abc123
+
